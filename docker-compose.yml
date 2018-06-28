@@ -1,0 +1,22 @@
+version: '3'
+services:
+  memcached:
+    image: memcached:latest
+    restart: unless-stopped
+    ports:
+      - "11211:11211"
+    expose:
+      - "11211"
+  rabbit:
+    hostname: "rabbit"
+    image: rabbitmq:3-management
+    environment:
+      - RABBITMQ_DEFAULT_USER=ico
+      - RABBITMQ_DEFAULT_PASS=supericomonitor
+      - RABBITMQ_DEFAULT_VHOST=ico
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+networks:
+  default:
+    driver: bridge

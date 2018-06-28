@@ -4,17 +4,28 @@
 	<main role="main" class="container">
 
 		<div class="starter-template">
-			<h1>Анализ {{ token_info.name }}</h1>
+			<h1>Анализ {{ token.name }}</h1>
 		</div>
+		{{ volumes }}
 		<div class="row">
-			<div class="md-8 offset-md-2">
-				<canvas id="myChart" width="400" height="400"></canvas>
+			<div class="md-3" style="padding-top: 100px;">
+				<div><b>Символ токена</b>: {{token.symbol}}</div>
+				<div><b>Кол-во значимых чисел</b>: {{token.decimals}}</div>
+				<div><b>Кол-вл токенов</b>: {{token.total_supply}} {{token.symbol}}</div>
+				<!--div><b>Start Date</b>: {{token.ico_start_date}}</div>
+				<div><b>End Date</b>: {{token.ico_end_date}}</div-->
+				<button id="update_volume" type="button" class="btn btn-primary">Обновить список транзакций</button>
+
 			</div>
+			<div class="md-8 offset-md-1">
+				<div id="myChart" data-pk="{{ token.id }}"></div>
+			</div>
+
 		</div>
 
 	</main><!-- /.container -->
 
 {% endblock %}
 {% block script %}
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
+ <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 {% endblock %}

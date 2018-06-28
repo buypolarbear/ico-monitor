@@ -12,6 +12,11 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 
 import os
 
+CELERY_BROKER_URL = "amqp://ico:supericomonitor@192.168.99.100:5672/ico"
+CELERY_RESULT_BACKEND = "cache+memcached://192.168.99.100:11211/"
+
+
+ETHPLORER_API_KEY = "PUT_KEY_HERE"
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -37,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'monitor.apps.MonitorConfig',
     'rest_framework',
+
 ]
 
 MIDDLEWARE = [

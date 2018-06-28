@@ -5,48 +5,58 @@
 
 		<div class="starter-template">
 			<h1>Анализ ICO</h1>
-			<p class="lead">Рейтинг токенов работающих на платформе Ethereum</p>
+			<p class="lead">Визуальный анализ объемов транзакций ERC20 токенов</p>
 		</div>
 		<div class="row">
 			<div class="add-form col-md-5 ">
-				<label for="basic-url">Проверить контракт </label>
+				<label for="basic-url">Добавить токен </label>
 				<div class="spinner">
-						<div class="bounce1"></div>
-						<div class="bounce2"></div>
-						<div class="bounce3"></div>
-					</div>
+					<div class="bounce1"></div>
+					<div class="bounce2"></div>
+					<div class="bounce3"></div>
+				</div>
 				<div class="input-group">
 					<div class="opac"></div>
 					<input type="text" class="form-control" id="contract"
 					       placeholder="Например: 0xb47393bd49be83445d77e55b520b73fecb575267">
+
 					<div class="input-group-append">
-						<button class="btn btn-success" id="add" type="button">Add</button>
+						<button class="btn btn-success" id="add" type="button">+</button>
+					</div>
+					<div id="error" class="invalid-feedback" style="display:none">
+						Введен некорректный Ethereum адрес
 					</div>
 
 				</div>
 			</div>
 		</div>
 		<div class="ico-table">
-			<table class="table table-hover">
+			<table id="tokens" class="table table-hover">
 				<thead class="thead-dark">
 				<tr>
 					<th scope="col">#</th>
-					<th scope="col">ICO name</th>
-					<th scope="col">IS SCUM</th>
-					<th scope="col">Start date</th>
-					<th scope="col">END DATE</th>
-					<th scope="col">Address</th>
+					<th scope="col">Название токена</th>
+					<th scope="col">Адрес</th>
+					<th scope="col">Скам?</th>
+					<!--th scope="col">Start date</th>
+					<th scope="col">END DATE</th-->
+
 				</tr>
 				</thead>
 				<tbody>
 				{% for token in tokens %}
-					<tr data-href='/token/{{ token.contract }}'>
-						<th scope="row">{{ token.id }}</th>
+					<tr data-href='/token/{{ token.address }}'>
+						<td scope="row">{{ token.id }}</td>
 						<td>{{ token.name }}</td>
-						<td>{{ token.is_scum }}</td>
-						<td>{{ token.ico_start_date }}</td>
-						<td>{{ token.ico_end_date }}</td>
-						<td>{{ token.contract }}</td>
+						<td>{{ token.address }}</td>
+						{% if token.is_scum %}
+							<td><p class="text-danger">Да</p></td>
+						{% else %}
+							<td>Нет</td>
+						{% endif %}
+						<!--td>{{ token.ico_start_date }}</td>
+						<td>{{ token.ico_end_date }}</td-->
+
 					</tr>
 				{% endfor %}
 
